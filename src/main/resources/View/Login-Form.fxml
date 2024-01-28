@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="MainAnchore" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: #2E2E2E;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.MyChatApp.Controller.LoginFormController">
+   <children>
+      <AnchorPane prefHeight="391.0" prefWidth="600.0" styleClass="shadow" stylesheets="@../Style/Shadow.css">
+         <children>
+            <ImageView fitHeight="377.0" fitWidth="575.0" layoutX="12.0" layoutY="13.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Assets/Login%20img.jpg" />
+               </image>
+            </ImageView>
+            <Circle fill="#bfd1e7" layoutX="299.0" layoutY="388.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="284.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/icons8-down-24.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="276.0" layoutY="365.0" prefHeight="46.0" prefWidth="46.0" style="-fx-background-radius: 90;" text=" " textFill="#2f81c4" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="231.0" layoutY="424.0" styleClass="shadow" stylesheets="@../Style/Shadow.css" text="USER LOGIN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Pane layoutX="132.0" layoutY="498.0" prefHeight="38.0" prefWidth="318.0" style="-fx-background-color: #7D7D7D; -fx-background-radius: 30;" styleClass="shadow" stylesheets="@../Style/Shadow.css">
+         <children>
+            <JFXTextField fx:id="UserNameTextFeild" layoutX="57.0" layoutY="-5.0" prefHeight="25.0" prefWidth="231.0" promptText="User Name">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <ImageView fitHeight="30.0" fitWidth="24.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/username.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="132.0" layoutY="548.0" prefHeight="38.0" prefWidth="318.0" style="-fx-background-color: #7D7D7D; -fx-background-radius: 30;" styleClass="shadow" stylesheets="@../Style/Shadow.css">
+         <children>
+            <JFXTextField fx:id="PasswordTextFeild" layoutX="60.0" layoutY="-3.0" prefHeight="25.0" prefWidth="231.0" promptText="Password" stylesheets="@../Style/Shadow.css">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <ImageView fitHeight="30.0" fitWidth="24.0" layoutX="10.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/Password.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="245.0" layoutY="613.0" onAction="#LoginButtonOnAction" prefHeight="26.0" prefWidth="96.0" ripplerFill="#0a58b1" style="-fx-background-color: #19D9ED; -fx-background-radius: 30;" styleClass="shadow" stylesheets="@../Style/Shadow.css" text="Login">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
