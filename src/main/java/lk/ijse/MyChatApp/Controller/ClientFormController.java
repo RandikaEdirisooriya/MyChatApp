@@ -1,9 +1,7 @@
 package lk.ijse.MyChatApp.Controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -13,44 +11,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Date;
 
-public class ChatFormController {
+public class ClientFormController {
+    public AnchorPane mainAnchorPane;
+    public ScrollPane messageScrollPane;
+    public AnchorPane MessageAnchore;
+    public Label label;
     public Label datelbl;
     public Label timelbl;
-    public AnchorPane MessageAnchore;
-    public ScrollPane messageScrollPane;
     public JFXTextField MessageTextFeild;
-    public AnchorPane mainAnchorPane;
-    private DataOutputStream dataOutputStream;
-    private DataInputStream dataInputStream;
-    Socket socket;
-    ServerSocket serverSocket;
-    String message = "";
-    private int y=662;
-    private double totalHeight = 0; // Initialize total height to 0
-    private double totalHeightRecive = 40; // Initialize total height to 0
+    public JFXButton ImgButton;
 
-    public void initialize() throws SQLException, ClassNotFoundException, IOException {
-        loadDateAndTime();
+    String message="";
+    Socket socket;
+    DataOutputStream dataOutputStream;
+    DataInputStream dataInputStream;
+    private double totalHeight = 40; // Initialize total height to 0
+    private double totalHeightRecive;
+    public void initialize(){
         new Thread(() -> {
             try {
-                serverSocket = new ServerSocket(44000);
-                System.out.println("server started");
-                socket = serverSocket.accept();
-                System.out.println("client connected");
-                dataInputStream = new DataInputStream(socket.getInputStream());
-                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                socket=new Socket("localhost",44000);
+                dataInputStream=new DataInputStream(socket.getInputStream());
+                dataOutputStream=new DataOutputStream(socket.getOutputStream());
                 while (true) {
                     String type = dataInputStream.readUTF();
                     if (type.equals("Message")) {
@@ -59,7 +48,7 @@ public class ChatFormController {
                         setReciveMessage(sms);
                     }
                     if (type.equals("image")) {
-                     //imge ek ganna
+                        System.out.println("get img");
                         String size = dataInputStream.readUTF();
                         byte[] blob = new byte[Integer.parseInt(size)];
                         dataInputStream.readFully(blob);
@@ -110,29 +99,9 @@ public class ChatFormController {
         });
     }
 
-
-    private void loadDateAndTime() {
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        datelbl.setText(format.format(date));
-
-        Timeline time = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            LocalTime currentTime = LocalTime.now();
-            timelbl.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
-        }), new KeyFrame(Duration.seconds(1)));
-
-        time.setCycleCount(Animation.INDEFINITE);
-        time.play();
-    }
-
-
-
     public void SendButtonOnAction(ActionEvent actionEvent) throws IOException {
         sendMessage();
     }
-
-
-
 
     private void sendMessage() throws IOException {
         dataOutputStream.writeUTF("Message");
@@ -141,8 +110,6 @@ public class ChatFormController {
 
         setMessage();
     }
-
-
 
     private void setMessage() {
         Label newLabel = new Label("  " + MessageTextFeild.getText() + "     ");
@@ -164,7 +131,6 @@ public class ChatFormController {
         MessageTextFeild.clear();
     }
 
-
     public void ImgButtonOnAction(ActionEvent actionEvent) {
         FileChooser chooser = new FileChooser();
         File file =chooser.showOpenDialog(mainAnchorPane.getScene().getWindow());
@@ -174,7 +140,7 @@ public class ChatFormController {
                 Image image = new Image(fileInputStream);
 
                 byte[] blob = imagenToByte(image);
-               sendImg(blob);
+                sendImg(blob);
                 setMyImg(image);
             }
         } catch (FileNotFoundException e) {
@@ -185,8 +151,6 @@ public class ChatFormController {
 
 
     }
-
-
     private void setMyImg(Image image) {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);
@@ -199,10 +163,6 @@ public class ChatFormController {
         // Increment totalHeight to update the position for the next message
         totalHeight += imageView.getBoundsInParent().getHeight() + 40;
     }
-
-
-
-
     private void sendImg(byte[] blob) {
         //
         try {
@@ -215,9 +175,6 @@ public class ChatFormController {
             e.printStackTrace();
         }
     }
-
-
-
 
     private static byte[] imagenToByte(Image image) {
         BufferedImage bufferimage = SwingFXUtils.fromFXImage(image, null);
@@ -233,3 +190,4 @@ public class ChatFormController {
         return data;
     }
 }
+
