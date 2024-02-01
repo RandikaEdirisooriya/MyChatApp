@@ -2,6 +2,7 @@ package lk.ijse.MyChatApp.Controller;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -39,6 +40,7 @@ public class LoginFormController {
 
                         Socket socket = serverSocket.accept();
                         System.out.println("new user connected");
+
                         Client client = new Client(socket);
                     }
 
@@ -58,5 +60,6 @@ public class LoginFormController {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
+        UserNameTextFeild.clear();
     }
 }

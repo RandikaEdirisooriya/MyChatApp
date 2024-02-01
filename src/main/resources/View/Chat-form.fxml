@@ -60,16 +60,62 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Separator layoutY="600.0" prefHeight="13.0" prefWidth="600.0" />
       <Pane layoutX="63.0" layoutY="624.0" prefHeight="40.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 30;" styleClass="shadow" stylesheets="@../Style/Shadow.css">
          <children>
-            <JFXTextField fx:id="MessageTextFeild" alignment="TOP_LEFT" layoutX="21.0" layoutY="6.0" prefHeight="30.0" prefWidth="298.0" promptText="Type here">
+            <JFXTextField fx:id="MessageTextFeild" alignment="TOP_LEFT" layoutX="21.0" layoutY="6.0" onAction="#SendButtonOnAction" prefHeight="30.0" prefWidth="298.0" promptText="Type here">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXTextField>
+            <AnchorPane fx:id="emojiAncore" layoutX="162.0" layoutY="-35.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: black;">
+               <children>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="247.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face1%20new.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="42.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" layoutX="71.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face3%20new.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="132.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face%204%20new.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="177.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face6%20new.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="30.0" layoutX="214.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/face5new.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="-2.0" layoutY="-1.0" onAction="#emojiOne" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="38.0" layoutY="-1.0" onAction="#emojitwo" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="83.0" layoutY="-1.0" onAction="#emojithree" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="130.0" layoutY="-1.0" onAction="#emojifour" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="175.0" layoutY="-1.0" onAction="#emojifive" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="211.0" layoutY="-1.0" onAction="#emojisix" prefHeight="31.0" prefWidth="31.0" text=" " />
+                  <JFXButton layoutX="245.0" layoutY="-1.0" onAction="#emojiseven" prefHeight="31.0" prefWidth="31.0" text=" " />
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
-      <Separator layoutY="600.0" prefHeight="13.0" prefWidth="600.0" />
       <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="486.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Assets/send.png" />
@@ -86,7 +132,12 @@
             <Image url="@../Assets/camera.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="386.0" layoutY="630.0" prefHeight="30.0" prefWidth="31.0" style="-fx-background-radius: 90;" text=" " />
+      <JFXButton fx:id="emojibtn" layoutX="386.0" layoutY="630.0" onAction="#SendEmoji" prefHeight="30.0" prefWidth="31.0" style="-fx-background-radius: 90;" text=" " />
       <JFXButton fx:id="ImgButton" layoutX="436.0" layoutY="630.0" onAction="#ImgButtonOnAction" prefHeight="30.0" prefWidth="31.0" style="-fx-background-radius: 90;" text=" " />
+      <Label fx:id="NameLabel" layoutX="275.0" layoutY="59.0" styleClass="shadow" stylesheets="@../Style/Shadow.css" text="a" textFill="#0849b1">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

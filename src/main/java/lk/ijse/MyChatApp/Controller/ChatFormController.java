@@ -1,5 +1,6 @@
 package lk.ijse.MyChatApp.Controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -37,6 +38,9 @@ public class ChatFormController {
     public JFXTextField MessageTextFeild;
     public AnchorPane mainAnchorPane;
     public VBox Vbox;
+    public Label NameLabel;
+    public AnchorPane emojiAncore;
+    public JFXButton emojibtn;
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     Socket socket;
@@ -46,8 +50,21 @@ public class ChatFormController {
     private double totalHeightRecive = 40; // Initialize total height to 0
     String name;
 
+
     public void initialize() throws SQLException, ClassNotFoundException, IOException {
         name = LoginFormController.name;
+        NameLabel.setText(name);
+        emojiAncore.setVisible(false);
+        emojibtn.setOnMouseEntered(event -> {
+            // Show emojiAncore when the mouse enters the emoji button
+            emojiAncore.setVisible(true);
+        });
+
+
+        mainAnchorPane.setOnMouseClicked(event -> {
+            // Hide emojiAncore when the mouse is clicked outside the emoji button
+            emojiAncore.setVisible(false);
+        });
 
 
         loadDateAndTime();
@@ -124,7 +141,8 @@ public class ChatFormController {
                             "-fx-border-radius: 15;" +
                             "-fx-background-radius: 15;" +
                             "-fx-font-size: 15;" +
-                            "-fx-font: bold;"
+                            "-fx-font: bold;" +
+                            "  font-weight: 900;"
             );
 
             HBox hBox = new HBox(newLabel);
@@ -159,8 +177,8 @@ public class ChatFormController {
             dataOutputStream.writeUTF(name+" : "+message); // x:hi
             dataOutputStream.flush();
 
-            Label label = new Label(message);
-            label.setStyle( "-fx-background-color: #76ffb3;" +
+            Label label = new Label("  "+message+"  ");
+            label.setStyle( "-fx-background-color: #05d561;" +
                     "-fx-border-radius: 15;" +
                     "-fx-background-radius: 15;" +
                     "-fx-font-size: 15;" +
@@ -169,6 +187,7 @@ public class ChatFormController {
             hBox.setStyle("-fx-padding:20;");
             hBox.setAlignment(Pos.CENTER_RIGHT);  // Align to the right for the user's messages
             Vbox.getChildren().add(hBox);
+            MessageTextFeild.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -249,4 +268,40 @@ public class ChatFormController {
         return data;
     }
 
+    public void SendEmoji(ActionEvent actionEvent) {
+    }
+
+    public void emojiOne(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE00");
+    }
+
+    public void emojitwo(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE01");
+    }
+
+    public void emojithree(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE02");
+    }
+
+    public void emojifour(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE03");
+    }
+
+    public void emojifive(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE04");
+    }
+
+    public void emojisix(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE05");
+    }
+
+    public void emojiseven(ActionEvent actionEvent) {
+        appendEmoji("\uD83D\uDE06");
+    }
+
+    private void appendEmoji(String emoji) {
+        String currentText = MessageTextFeild.getText();
+        MessageTextFeild.setText(currentText + emoji);
+        emojiAncore.setVisible(false);
+    }
 }
